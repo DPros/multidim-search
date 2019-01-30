@@ -58,30 +58,37 @@ export class DoubleLinkedListService implements DbService {
     }
 
     linkify(monitors: MonitorModel[]): void {
-        for (let i = 0; i < monitors.length - 1; i++) {
-            this.compare(monitors[i], monitors[i + 1], "weight");
-            this.compare(monitors[i], monitors[i + 1], "price");
-            this.compare(monitors[i], monitors[i + 1], "resolution.width");
-            this.compare(monitors[i], monitors[i + 1], "resolution.height");
-            this.compare(monitors[i], monitors[i + 1], "resolution.totalPixels");
-            this.compare(monitors[i], monitors[i + 1], "diagonal");
-            this.compare(monitors[i], monitors[i + 1], "manufacturer");
-            this.compare(monitors[i], monitors[i + 1], "model");
+        console.log(monitors.map(_ => _.weight.value));
+        this.linkifyBy(monitors, "weight");
+        this.linkifyBy(monitors, "price");
+        this.linkifyBy(monitors, "resolution.width");
+        this.linkifyBy(monitors, "resolution.height");
+        this.linkifyBy(monitors, "resolution.totalPixels");
+        this.linkifyBy(monitors, "diagonal");
+        this.linkifyBy(monitors, "manufacturer");
+        this.linkifyBy(monitors, "model");
+    }
 
+    linkifyBy(monitors: MonitorModel[], field: string): void {
+        let max = this.compare(monitors[0], monitors[1], field);
+        for (let i = 2; i < monitors.length; i++) {
+            max = this.compare(max, monitors[i], field);
         }
     }
 
-    compare(a: MonitorModel, b: MonitorModel, field: string): void {
-        if (this.accessField(a, field).value < this.accessField(b, field).value) {
+    compare(a: MonitorModel, b: MonitorModel, field: string): MonitorModel {
+        if (!a) return b;
+        if (!b) return a;
+        if (this.accessField(a, field).value <= this.accessField(b, field).value) {
+            this.accessField(b, field).next = this.accessField(a, field).next;
             this.accessField(a, field).next = b;
             this.accessField(b, field).prev = a;
+            return b;
         } else {
-            this.accessField(b, field).prev = this.accessField(a, field).prev;
-            this.accessField(a, field).prev = b;
+            this.accessField(a, field).next = this.accessField(b, field).next;
             this.accessField(b, field).next = a;
-            if (this.accessField(b, field).prev) {
-                this.compare(this.accessField(b, field).prev, b, field);
-            }
+            this.accessField(a, field).prev = this.compare(this.accessField(a, field).prev, b, field);
+            return a;
         }
     }
 
