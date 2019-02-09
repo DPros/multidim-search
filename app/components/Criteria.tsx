@@ -1,11 +1,14 @@
 import * as React from "react";
-import {IterableValueModel} from "../models/iterable-value.model";
+import {IndexedValueModel} from "../models/indexed-value.model";
 import {MonitorModel} from "../models/monitor.model";
+import MonitorLink from "./MonitorLink";
 
 export interface ICriteriaProps {
-    criteria: IterableValueModel<number | string>;
+    criteria: IndexedValueModel<number | string>;
     title: string;
-    onSelect: (monitor: MonitorModel | undefined) => void;
+    onSelect: (monitor: MonitorModel) => void;
+    monitors: MonitorModel[];
+    ordering: number[];
 }
 
 const styles = require('./Criteria.scss');
@@ -13,19 +16,19 @@ const styles = require('./Criteria.scss');
 export default class Criteria extends React.Component<ICriteriaProps, any> {
 
     render() {
-        const {criteria, title, onSelect} = this.props;
+        const {criteria, title, onSelect, monitors, ordering} = this.props;
         return (
             <div>
                 <div className={styles.criteria}>
                     <div>
-                        {criteria.prev && <span onClick={() => onSelect(criteria.prev)}>{'<'}</span>}
+                        <MonitorLink monitor={monitors[ordering[criteria.index - 1]]} onClick={onSelect}/>
                     </div>
                     <div className={"center"}>
-                        <div>{title}</div>
+                        <h1>{title}</h1>
                         <div>{criteria.value}</div>
                     </div>
                     <div className={"right"}>
-                        {criteria.next && <span onClick={() => onSelect(criteria.next)}>{'>'}</span>}
+                        <MonitorLink monitor={monitors[ordering[criteria.index + 1]]} onClick={onSelect}/>
                     </div>
                 </div>
             </div>

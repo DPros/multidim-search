@@ -1,13 +1,13 @@
-import {IterableValueModel} from "./iterable-value.model";
+import {IndexedValueModel} from "./indexed-value.model";
 
 export class ResolutionModel {
-    width: IterableValueModel<number>;
-    height: IterableValueModel<number>;
-    totalPixels: IterableValueModel<number>;
+    width: IndexedValueModel<number>;
+    height: IndexedValueModel<number>;
+    totalPixels: IndexedValueModel<number>;
 
     constructor(width: number, height: number) {
-        this.width = {value: width};
-        this.height = {value: height};
-        this.totalPixels = {value: width * height};
+        this.width = {value: width, index: 0};
+        this.height = {value: height, index: 0};
+        this.totalPixels = {value: width * height, index: 0};
     }
 }

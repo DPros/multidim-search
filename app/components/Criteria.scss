@@ -1,8 +1,11 @@
 :local {
   .criteria {
     display: flex;
+    width: 100%;
+    justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    height: 200px;
     > * {
       padding: 10px;
     }
