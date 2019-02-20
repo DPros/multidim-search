@@ -20,6 +20,9 @@ export default class Criteria extends React.Component<ICriteriaProps, any> {
         return (
             <div>
                 <div className={styles.criteria}>
+                    <div style={{cursor: "pointer"}} onClick={() => onSelect(monitors[ordering[0]])}>
+                        {"<<"}
+                    </div>
                     <div>
                         <MonitorLink monitor={monitors[ordering[criteria.index - 1]]} onClick={onSelect}/>
                     </div>
@@ -29,6 +32,9 @@ export default class Criteria extends React.Component<ICriteriaProps, any> {
                     </div>
                     <div className={"right"}>
                         <MonitorLink monitor={monitors[ordering[criteria.index + 1]]} onClick={onSelect}/>
+                    </div>
+                    <div style={{cursor: "pointer"}} onClick={() => onSelect(monitors[ordering[ordering.length - 1]])}>
+                        {">>"}
                     </div>
                 </div>
             </div>
