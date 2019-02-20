@@ -1,9 +1,9 @@
-{"weight":{"value":1.94},"price":{"value":1999},"resolution":{"width":{"value":1366},"height":{"value":768},"totalPixels":{"value":1049088}},"diagonal":{"value":18.5},"manufacturer":{"value":"Philips"},"model":{"value":"V-line 193V5LSB2/62"},"_id":"9mGyH4gnM6NgtlOu"}
-{"weight":{"value":4.71},"price":{"value":8599},"resolution":{"width":{"value":3840},"height":{"value":2160},"totalPixels":{"value":8294400}},"diagonal":{"value":28},"manufacturer":{"value":"Samsung"},"model":{"value":"U28E590D"},"_id":"BOIVDRnhLJkYXP8R"}
-{"weight":{"value":2.9},"price":{"value":3699},"resolution":{"width":{"value":1920},"height":{"value":1080},"totalPixels":{"value":2073600}},"diagonal":{"value":24},"manufacturer":{"value":"Dell"},"model":{"value":"SE2416H"},"_id":"BxKNXzCWB95xbeXa"}
-{"weight":{"value":4.4},"price":{"value":7599},"resolution":{"width":{"value":2560},"height":{"value":1080},"totalPixels":{"value":2764800}},"diagonal":{"value":29},"manufacturer":{"value":"LG"},"model":{"value":"29WK500-P"},"_id":"GGzVWPUak2Ev9uRM"}
-{"weight":{"value":2.35},"price":{"value":2499},"resolution":{"width":{"value":1920},"height":{"value":1080},"totalPixels":{"value":2073600}},"diagonal":{"value":21.5},"manufacturer":{"value":"Philips"},"model":{"value":"223V5LSB2/10/62"},"_id":"OG4cM0bselMdMjjP"}
-{"weight":{"value":3.6},"price":{"value":6299},"resolution":{"width":{"value":1920},"height":{"value":1080},"totalPixels":{"value":2073600}},"diagonal":{"value":27},"manufacturer":{"value":"Samsung"},"model":{"value":"C27F396F"},"_id":"VyG8NbxTo0gTzIbI"}
-{"weight":{"value":2.7},"price":{"value":4399},"resolution":{"width":{"value":1920},"height":{"value":1080},"totalPixels":{"value":2073600}},"diagonal":{"value":23},"manufacturer":{"value":"LG"},"model":{"value":"23MP68VQ-P"},"_id":"W8dyP5jRExmy15ok"}
-{"weight":{"value":3.44},"price":{"value":7749},"resolution":{"width":{"value":2560},"height":{"value":1440},"totalPixels":{"value":3686400}},"diagonal":{"value":23.8},"manufacturer":{"value":"Dell"},"model":{"value":"P2418D"},"_id":"hxrQBsizObkajkTx"}
-{"weight":{"value":2.8},"price":{"value":3999},"resolution":{"width":{"value":1920},"height":{"value":1080},"totalPixels":{"value":2073600}},"diagonal":{"value":23.5},"manufacturer":{"value":"Samsung"},"model":{"value":"C24F396F"},"_id":"oSP1Mz2UyfI702yB"}
+{"manufacturer":"Dell","model":"P2418D","price":7749,"pixelHeight":1440,"pixelWidth":2560,"diagonal":23.8,"weight":3.44,"_id":"8FzPYhwqf8k1xVlL"}
+{"manufacturer":"LG","model":"29WK500-P","price":7599,"pixelHeight":1080,"pixelWidth":2560,"diagonal":29,"weight":4.4,"_id":"CCEHBOoBO4id14yY"}
+{"manufacturer":"Samsung","model":"C24F396F","price":3999,"pixelHeight":1080,"pixelWidth":1920,"diagonal":23.5,"weight":2.8,"_id":"FP8ptZyOaNYrQsRn"}
+{"manufacturer":"LG","model":"23MP68VQ-P","price":4399,"pixelHeight":1080,"pixelWidth":1920,"diagonal":23,"weight":2.7,"_id":"K2FRsv5MX0E1PghE"}
+{"manufacturer":"Samsung","model":"U28E590D","price":8599,"pixelHeight":2160,"pixelWidth":3840,"diagonal":28,"weight":4.71,"_id":"WVwsWe0TOGcPs5Ru"}
+{"manufacturer":"Philips","model":"V-line 193V5LSB2","price":1999,"pixelHeight":768,"pixelWidth":1366,"diagonal":18.5,"weight":1.94,"_id":"pR5uV8vmrBjbmDl0"}
+{"manufacturer":"Samsung","model":"C27F396F","price":6299,"pixelHeight":1080,"pixelWidth":1920,"diagonal":27,"weight":3.6,"_id":"sJ4ctYu8CuNugFKp"}
+{"manufacturer":"Philips","model":"223V5LSB2","price":2499,"pixelHeight":1080,"pixelWidth":1920,"diagonal":21.5,"weight":2.35,"_id":"sQSYu3JfEJ6zKXJA"}
+{"manufacturer":"Dell","model":"SE2416H","price":3699,"pixelHeight":1080,"pixelWidth":1920,"diagonal":24,"weight":2.9,"_id":"wSBbYQY8Js5E5nia"}
