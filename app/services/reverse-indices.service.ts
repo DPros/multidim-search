@@ -4,17 +4,18 @@ import Nedb = require("nedb");
 export class ReverseIndicesService {
 
     db: Nedb;
+    fields: string[] = ["weight", "price", "pixelWidth", "pixelHeight", "diagonal", "manufacturer", "model"];
 
     get(callback: (monitors: MonitorModel[], ordering: { [criteria: string]: number[] }) => void): void {
         this.db.find({}).exec((err, docs: object[]) => {
             const monitors = docs.map(this.monitor);
-            callback(monitors, this.sort(monitors));
+            callback(monitors, this.getIndices(monitors));
         });
     }
 
-    save(monitor: object, callback: () => void, id?: string): void {
-        if (id) {
-            this.delete(id, () => this.db.insert(monitor, callback))
+    save(monitor: object, callback: () => void, _id?: string): void {
+        if (_id) {
+            this.db.update({_id}, {...monitor, _id}, {}, callback);
         } else {
             this.db.insert(monitor, callback)
         }
@@ -51,6 +52,7 @@ export class ReverseIndicesService {
     init(callback: () => void): void {
         const $self = this;
         this.db = new Nedb({filename: './monitors.db'});
+        this.fields.forEach(fieldName => this.db.ensureIndex({fieldName}));
         this.db.loadDatabase(function () {
             $self.db.find({}).exec(function (err: any, docs: any[]) {
                 if (!docs.length) {
@@ -64,7 +66,11 @@ export class ReverseIndicesService {
                         $self.objectify("Philips", "V-line 193V5LSB2", 1999, 1366, 768, 18.5, 1.94),
                         $self.objectify("Samsung", "U28E590D", 8599, 3840, 2160, 28, 4.71),
                         $self.objectify("LG", "29WK500-P", 7599, 2560, 1080, 29, 4.4)
-                    ], callback)
+                    ], () => {
+                        $self.fields.forEach(_ => {
+
+                        })
+                    })
                 } else {
                     callback();
                 }
@@ -72,26 +78,20 @@ export class ReverseIndicesService {
         });
     }
 
-    sort(monitors: MonitorModel[]): { [criteria: string]: number[] } {
-        const ordering: { [criteria: string]: number[] } = {};
-        ordering.weight = this.sortBy(monitors, "weight");
-        ordering.price = this.sortBy(monitors, "price");
-        ordering.resolutionWidth = this.sortBy(monitors, "pixelWidth");
-        ordering.resolutionHeight = this.sortBy(monitors, "pixelHeight");
-        ordering.resolutionTotalPixels = this.sortBy(monitors, "totalPixels");
-        ordering.diagonal = this.sortBy(monitors, "diagonal");
-        ordering.manufacturer = this.sortBy(monitors, "manufacturer");
-        ordering.model = this.sortBy(monitors, "model");
-        return ordering;
+    getIndices(callback: (ordering: Record<string, string[]>) => void): void {
+        const ordering: Record<string, string[]> = {};
+        this.getIndex(this.fields, ordering, callback);
     }
 
-    sortBy(monitors: MonitorModel[], field: string): number[] {
-        const mapped = monitors.map((el, i) => {
-            return {index: i, value: el[field].value};
-        });
-
-        mapped.sort((a, b) => a.value > b.value ? 1 : a.value < b.value ? -1 : 0);
-        mapped.forEach(({index}, i) => monitors[index][field].index = i);
-        return mapped.map(_ => _.index);
+    getIndex(fields: string[], ordering: Record<string, string[]>, callback: (ordering: Record<string, string[]>) => void): void {
+        const $self = this;
+        if (fields.length) {
+            this.db.find({}, {_id: 1}).sort(fields[0]).exec(function (err: any, docs: any[]) {
+                ordering[fields[0]] = docs;
+                $self.getIndex(fields.slice(1), ordering, callback);
+            });
+        } else {
+            callback(ordering);
+        }
     }
 }
